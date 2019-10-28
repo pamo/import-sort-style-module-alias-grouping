@@ -2,9 +2,7 @@ import { IStyleAPI, IStyleItem } from 'import-sort-style';
 import { IImport } from 'import-sort-parser';
 
 const hasAlias = (aliases: string[]) => (imported: IImport) =>
-  aliases.some(
-    (alias: string): boolean => imported.moduleName.indexOf(alias) === 0
-  );
+  aliases.some((alias: string): boolean => imported.moduleName.includes(alias));
 
 export default (
   styleApi: IStyleAPI,
@@ -19,22 +17,26 @@ export default (
     isAbsoluteModule,
     isNodeModule,
     isRelativeModule,
-    member,
+    isScopedModule,
     moduleName,
     naturally,
+    not,
+    or,
     unicode
   } = styleApi;
   const isAliasModule = hasAlias(options.alias || []);
 
   return [
-    // import … from "{third-party-alias}/foo";
+    // import … from "@third-party-alias/foo";
     {
-      match: and(isNodeModule, isAbsoluteModule, isAliasModule),
+      match: or(
+        and(isNodeModule, isScopedModule),
+        and(isAliasModule, isScopedModule)
+      ),
       sort: moduleName(naturally),
       sortNamedMembers: alias(unicode)
     },
     { separator: true },
-
     // import … from "fs";
     {
       match: isNodeModule,
@@ -47,16 +49,12 @@ export default (
     { match: and(hasNoMember, isAbsoluteModule) },
     { separator: true },
 
-    // import … from "{relative-alias}/bar";
+    // import … from "@first-party-alias/bar";
     {
-      match: and(isRelativeModule, isAbsoluteModule, isAliasModule),
-      sort: member(naturally),
+      match: and(isScopedModule),
+      sort: moduleName(naturally),
       sortNamedMembers: alias(unicode)
     },
-    { separator: true },
-
-    // import "./foo"
-    { match: and(hasNoMember, isRelativeModule) },
     { separator: true },
 
     // import … from "foo";
@@ -67,8 +65,14 @@ export default (
     },
     { separator: true },
 
-    // import … from "./foo";
+    // import "./foo"
+    {
+      match: and(hasNoMember, isRelativeModule)
+    },
+    { separator: true },
+
     // import … from "../foo";
+    // import … from "./foo";
     {
       match: isRelativeModule,
       sort: [dotSegmentCount, moduleName(naturally)],
