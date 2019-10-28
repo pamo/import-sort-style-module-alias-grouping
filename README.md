@@ -4,39 +4,45 @@ A style for [import-sort](https://github.com/renke/import-sort) that is focused
 on modules and aliases.
 
 ```js
-// Third-party aliased modules by name
+// scoped third party node module
 import { NgModule } from '@angular/core';
+// scoped third party module with alias defined in options
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
-// Absolute modules with side effects (not sorted because order may matter)
-import 'a';
-import 'c';
-import 'b';
+// scoped first party modules
+import { CommentsModule } from '@app/modules/comments/comments.module';
+import { NoteModule } from '@app/modules/note/note.module';
+import { TodoModule } from '@app/modules/todo/todo.module';
+import { DialogModule } from '@app/shared/components/dialog';
+import { SharedModule } from '@app/shared/shared.module';
 
-// Relative modules with side effects (not sorted because order may matter)
-import './a';
-import './c';
-import './b';
+// relative imports sorted by paths
+import { SummariesComponent } from './components/summaries/summaries.component';
+import { SummariesApiService } from './shared/summaries-api.service';
+import { SummariesResolver } from './shared/summaries.resolver';
+import { SummariesActions } from './store/summaries.actions';
+import { SummariesEffects } from './store/summaries.effects';
+import {
+  summariesReducer,
+  summariesStatePath
+} from './store/summaries.reducer';
+import { SummariesSelectors } from './store/summaries.selectors';
+import { SummariesRoutingModule } from './summaries-routing.module';
+```
 
-// Modules from the Node.js "standard" library sorted by name
-import { readFile, writeFile } from 'fs';
-import * as path from 'path';
+Example `package.json` config
 
-// Third-party modules sorted by name
-import aa from 'aa';
-import bb from 'bb';
-import cc from 'cc';
-
-// First-party aliased modules by name
-import aaa from '@app/aaa';
-import bbb from '@app/bbb';
-import aaaa from '@app/bar/aaaa';
-import bbbb from '@app/foo/bbbb';
-
-// First-party modules sorted by "relative depth" and then by name
-import aaa from '../../aaa';
-import bbb from '../../bbb';
-import aaaa from '../aaaa';
-import bbbb from '../bbbb';
-import aaaaa from './aaaaa';
-import bbbbb from './bbbbb';
+```json
+"importSort": {
+    ".js, .ts": {
+      "style": "module-alias-grouping",
+      "parser": "typescript",
+      "options": {
+        "alias": [
+          "ngrx"
+        ]
+      }
+    }
+  }
 ```
