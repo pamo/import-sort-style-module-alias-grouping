@@ -1,6 +1,6 @@
 {
   "name": "import-sort-style-module-alias",
-  "version": "6.0.0",
+  "version": "0.0.1",
   "description": "An import-sort style that groups and sorts by modules and aliases",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -13,7 +13,10 @@
     "lint": "eslint --ext ts src"
   },
   "author": "Pamela Ocampo <pamela.ocampo@gmail.com> (https://github.com/pamo)",
-  "repository": "pamo/import-sort-style-module-alias",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pamo/import-sort-style-module-alias.git"
+  },
   "license": "ISC",
   "files": [
     "lib"
@@ -23,16 +26,31 @@
     "@types/mocha": "^5.2.3",
     "@types/node": "^10.3.5",
     "@typescript-eslint/eslint-plugin": "^1.2.0",
+    "@typescript-eslint/parser": "^2.6.0",
     "chai": "^4.0.2",
-    "eslint": "^5.13.0",
+    "eslint": "^6.6.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.0",
     "eslint-plugin-react": "^7.12.4",
     "import-sort-style": "^6.0.0",
     "mocha": "^5.2.0",
     "ts-node": "^8.0.2",
     "typescript": "^3.2.4"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/pamo/import-sort-style-module-alias/issues"
+  },
+  "homepage": "https://github.com/pamo/import-sort-style-module-alias#readme",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "import-sort-parser": "^6.0.0"
+  },
+  "keywords": [
+    "import-sort"
+  ]
 }
