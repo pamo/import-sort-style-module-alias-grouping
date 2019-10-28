@@ -1,4 +1,4 @@
-# import-sort-style-module-alias
+# import-sort-style-module-alias-grouping
 
 A style for [import-sort](https://github.com/renke/import-sort) that is focused
 on modules and aliases.

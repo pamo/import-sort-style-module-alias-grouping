@@ -1,5 +1,5 @@
 {
-  "name": "import-sort-style-module-alias",
+  "name": "import-sort-style-module-alias-grouping",
   "version": "0.0.1",
   "description": "An import-sort style that groups and sorts by modules and aliases",
   "main": "lib/index.js",
@@ -15,7 +15,7 @@
   "author": "Pamela Ocampo <pamela.ocampo@gmail.com> (https://github.com/pamo)",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pamo/import-sort-style-module-alias.git"
+    "url": "git+https://github.com/pamo/import-sort-style-module-alias-grouping.git"
   },
   "license": "ISC",
   "files": [
@@ -41,10 +41,11 @@
     "typescript": "^3.2.4"
   },
   "bugs": {
-    "url": "https://github.com/pamo/import-sort-style-module-alias/issues"
+    "url": "https://github.com/pamo/import-sort-style-module-alias-grouping/issues"
   },
-  "homepage": "https://github.com/pamo/import-sort-style-module-alias#readme",
+  "homepage": "https://github.com/pamo/import-sort-style-module-alias-grouping#readme",
   "directories": {
+    "lib": "lib",
     "test": "test"
   },
   "dependencies": {
