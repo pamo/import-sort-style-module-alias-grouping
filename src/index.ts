@@ -13,52 +13,63 @@ export default (
     alias,
     and,
     dotSegmentCount,
+    or,
+    hasDefaultMember,
+    hasNamedMembers,
+    hasNamespaceMember,
     hasNoMember,
-    isNodeModule,
+    isAbsoluteModule,
     isRelativeModule,
     isScopedModule,
     moduleName,
-    naturally,
     not,
-    or,
     unicode
   } = styleApi;
+
   const isAliasModule = hasAlias(options.alias || []);
 
   return [
-    // scoped modules
+    // import 'module';
+    { match: and(hasNoMember, isAbsoluteModule, not(isAliasModule)) },
+    // import * as foo from 'module';
+    {
+      match: and(
+        isAbsoluteModule,
+        hasNamespaceMember,
+        not(isScopedModule),
+        not(isAliasModule)
+      )
+    },
+    {
+      separator: true
+    },
+    // import ... from '@scope/foo';
     {
       match: and(isScopedModule, not(isAliasModule)),
       sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
-    // Node Modules
+    // import ... from 'foo';
     {
-      match: isNodeModule,
-      sort: moduleName(unicode),
-      sortNamedMembers: alias(unicode)
-    },
-    {
-      match: and(isNodeModule, not(hasNoMember)),
-      sort: moduleName(unicode),
-      sortNamedMembers: alias(unicode)
-    },
-    // alias modules
-    {
-      match: and(not(isScopedModule), isAliasModule),
+      match: and(isAbsoluteModule, not(isAliasModule), not(isScopedModule)),
       sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
     {
       separator: true
     },
-    // scoped alias modules
+    // import ... from '@{alias}/foo';
     {
       match: and(isScopedModule, isAliasModule),
       sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
-
+    // import ... from '{alias}';
+    {
+      match: and(isAbsoluteModule, not(isScopedModule), isAliasModule),
+      sort: moduleName(unicode),
+      sortNamedMembers: alias(unicode)
+    },
     {
       separator: true
     },
