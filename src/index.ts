@@ -14,7 +14,6 @@ export default (
     and,
     dotSegmentCount,
     hasNoMember,
-    isAbsoluteModule,
     isNodeModule,
     isRelativeModule,
     isScopedModule,
@@ -27,57 +26,55 @@ export default (
   const isAliasModule = hasAlias(options.alias || []);
 
   return [
-    // import … from "@third-party-alias/foo";
+    // scoped modules
     {
-      match: or(
-        and(isNodeModule, isScopedModule),
-        and(isAliasModule, isScopedModule)
-      ),
-      sort: moduleName(naturally),
+      match: and(isScopedModule, not(isAliasModule)),
+      sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
-    { separator: true },
-    // import … from "fs";
+    // Node Modules
     {
       match: isNodeModule,
-      sort: moduleName(naturally),
+      sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
-    { separator: true },
-
-    // import "foo"
-    { match: and(hasNoMember, isAbsoluteModule) },
-    { separator: true },
-
-    // import … from "@first-party-alias/bar";
     {
-      match: and(isScopedModule),
-      sort: moduleName(naturally),
+      match: and(isNodeModule, not(hasNoMember)),
+      sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
-    { separator: true },
-
-    // import … from "foo";
+    // alias modules
     {
-      match: isAbsoluteModule,
-      sort: moduleName(naturally),
+      match: and(not(isScopedModule), isAliasModule),
+      sort: moduleName(unicode),
       sortNamedMembers: alias(unicode)
     },
-    { separator: true },
-
-    // import "./foo"
     {
-      match: and(hasNoMember, isRelativeModule)
+      separator: true
     },
-    { separator: true },
+    // scoped alias modules
+    {
+      match: and(isScopedModule, isAliasModule),
+      sort: moduleName(unicode),
+      sortNamedMembers: alias(unicode)
+    },
 
-    // import … from "../foo";
-    // import … from "./foo";
+    {
+      separator: true
+    },
+    // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, moduleName(naturally)],
+      sort: [dotSegmentCount, moduleName(unicode)],
       sortNamedMembers: alias(unicode)
     },
-    { separator: true }
+    {
+      separator: true
+    },
+    // relative Modules
+    {
+      match: isRelativeModule,
+      sort: [dotSegmentCount, moduleName(unicode)]
+    }
   ];
 };

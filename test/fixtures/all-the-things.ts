@@ -7,6 +7,8 @@ import { TodoModule } from '@app/modules/todo/todo.module';
 import { DialogModule } from '@app/shared/components/dialog';
 import { NoteModule } from '@app/modules/note/note.module';
 import { SharedModule } from '@app/shared/shared.module';
+import { Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { SummariesRoutingModule } from './summaries-routing.module';
 import { SummariesComponent } from './components/summaries/summaries.component';
 import { SummariesApiService } from './shared/summaries-api.service';
@@ -24,6 +26,8 @@ export const expected =
   `import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CommentsModule } from '@app/modules/comments/comments.module';
 import { NoteModule } from '@app/modules/note/note.module';

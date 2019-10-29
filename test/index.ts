@@ -14,7 +14,7 @@ describe('sortImports', () => {
       moduleAliasGroupingStyle,
       undefined,
       {
-        alias: ['ngrx']
+        alias: ['app', 'rxjs']
       }
     );
     const actual = result.code;
