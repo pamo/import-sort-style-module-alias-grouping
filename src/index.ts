@@ -1,4 +1,5 @@
 import { IStyleAPI, IStyleItem } from 'import-sort-style';
+
 import { IImport } from 'import-sort-parser';
 
 const hasAlias = (aliases: string[]) => (imported: IImport) =>
@@ -13,15 +14,13 @@ export default (
     alias,
     and,
     dotSegmentCount,
-    or,
-    hasDefaultMember,
-    hasNamedMembers,
     hasNamespaceMember,
     hasNoMember,
     isAbsoluteModule,
     isRelativeModule,
     isScopedModule,
     moduleName,
+    naturally,
     not,
     unicode
   } = styleApi;
@@ -47,13 +46,13 @@ export default (
     {
       match: and(isScopedModule, not(isAliasModule)),
       sort: moduleName(unicode),
-      sortNamedMembers: alias(unicode)
+      sortNamedMembers: alias(naturally)
     },
     // import ... from 'foo';
     {
       match: and(isAbsoluteModule, not(isAliasModule), not(isScopedModule)),
       sort: moduleName(unicode),
-      sortNamedMembers: alias(unicode)
+      sortNamedMembers: alias(naturally)
     },
     {
       separator: true
@@ -62,13 +61,13 @@ export default (
     {
       match: and(isScopedModule, isAliasModule),
       sort: moduleName(unicode),
-      sortNamedMembers: alias(unicode)
+      sortNamedMembers: alias(naturally)
     },
     // import ... from '{alias}';
     {
       match: and(isAbsoluteModule, not(isScopedModule), isAliasModule),
       sort: moduleName(unicode),
-      sortNamedMembers: alias(unicode)
+      sortNamedMembers: alias(naturally)
     },
     {
       separator: true
@@ -77,7 +76,7 @@ export default (
     {
       match: isRelativeModule,
       sort: [dotSegmentCount, moduleName(unicode)],
-      sortNamedMembers: alias(unicode)
+      sortNamedMembers: alias(naturally)
     },
     {
       separator: true

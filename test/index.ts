@@ -1,8 +1,10 @@
 import 'mocha';
-import * as parser from 'import-sort-parser-typescript';
-import { applyChanges, sortImports } from 'import-sort';
-import { assert } from 'chai';
 
+import * as parser from 'import-sort-parser-typescript';
+
+import { applyChanges, sortImports } from 'import-sort';
+
+import { assert } from 'chai';
 import moduleAliasGroupingStyle from '../src';
 
 describe('sortImports', () => {
@@ -41,6 +43,21 @@ describe('sortImports', () => {
 
   it('should sort scoped internal libraries', async()=>{
     const { code, expected } = await import('./fixtures/internal-modules');
+    const result = sortImports(
+      code,
+      parser,
+      moduleAliasGroupingStyle,
+      undefined,
+    );
+    const actual = result.code;
+    const changes = result.changes;
+
+    assert.equal(actual, expected);
+    assert.equal(applyChanges(code, changes), expected);
+  })
+
+  it('should alphabetize named imports', async()=>{
+    const { code, expected } = await import('./fixtures/named-imports');
     const result = sortImports(
       code,
       parser,
