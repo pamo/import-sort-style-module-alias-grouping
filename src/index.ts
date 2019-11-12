@@ -19,6 +19,7 @@ export default (
     isAbsoluteModule,
     isRelativeModule,
     isScopedModule,
+    member,
     moduleName,
     naturally,
     not,
@@ -26,6 +27,8 @@ export default (
   } = styleApi;
 
   const isAliasModule = hasAlias(options.alias || []);
+
+  const eslintSort = (first, second) => unicode(first.toLowerCase(), second.toLowerCase());
 
   return [
     // import 'module';
@@ -45,14 +48,14 @@ export default (
     // import ... from '@scope/foo';
     {
       match: and(isScopedModule, not(isAliasModule)),
-      sort: moduleName(unicode),
-      sortNamedMembers: alias(naturally)
+      sort: moduleName(eslintSort),
+      sortNamedMembers: alias(eslintSort)
     },
     // import ... from 'foo';
     {
       match: and(isAbsoluteModule, not(isAliasModule), not(isScopedModule)),
-      sort: moduleName(unicode),
-      sortNamedMembers: alias(naturally)
+      sort: moduleName(eslintSort),
+      sortNamedMembers: alias(eslintSort)
     },
     {
       separator: true
@@ -60,14 +63,14 @@ export default (
     // import ... from '@{alias}/foo';
     {
       match: and(isScopedModule, isAliasModule),
-      sort: moduleName(unicode),
-      sortNamedMembers: alias(naturally)
+      sort: moduleName(eslintSort),
+      sortNamedMembers: alias(eslintSort)
     },
     // import ... from '{alias}';
     {
       match: and(isAbsoluteModule, not(isScopedModule), isAliasModule),
-      sort: moduleName(unicode),
-      sortNamedMembers: alias(naturally)
+      sort: moduleName(eslintSort),
+      sortNamedMembers: alias(eslintSort)
     },
     {
       separator: true
@@ -75,8 +78,8 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, moduleName(unicode)],
-      sortNamedMembers: alias(naturally)
+      sort: [dotSegmentCount, moduleName(eslintSort)],
+      sortNamedMembers: alias(eslintSort)
     },
     {
       separator: true
@@ -84,7 +87,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, moduleName(unicode)]
+      sort: [dotSegmentCount, moduleName(eslintSort)]
     }
   ];
 };
