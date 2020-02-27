@@ -1,5 +1,6 @@
-import { IImport } from 'import-sort-parser';
 import { IStyleAPI, IStyleItem } from 'import-sort-style';
+
+import { IImport } from 'import-sort-parser';
 
 const hasAlias = (aliases: string[]) => (imported: IImport) =>
   aliases.some((alias: string): boolean => imported.moduleName.includes(alias));
@@ -12,7 +13,6 @@ export default (
   const {
     alias,
     and,
-    dotSegmentCount,
     hasNamespaceMember,
     hasNoMember,
     isAbsoluteModule,
@@ -20,7 +20,6 @@ export default (
     isScopedModule,
     member,
     moduleName,
-    naturally,
     not,
     unicode
   } = styleApi;
