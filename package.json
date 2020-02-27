@@ -1,6 +1,6 @@
 {
   "name": "import-sort-style-module-alias-grouping",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "An import-sort style that groups and sorts by modules and aliases",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
