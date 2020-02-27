@@ -1,6 +1,5 @@
-import { IStyleAPI, IStyleItem } from 'import-sort-style';
-
 import { IImport } from 'import-sort-parser';
+import { IStyleAPI, IStyleItem } from 'import-sort-style';
 
 const hasAlias = (aliases: string[]) => (imported: IImport) =>
   aliases.some((alias: string): boolean => imported.moduleName.includes(alias));
@@ -28,7 +27,8 @@ export default (
 
   const isAliasModule = hasAlias(options.alias || []);
 
-  const eslintSort = (first, second) => unicode(first.toLowerCase(), second.toLowerCase());
+  const eslintSort = (first, second) =>
+    unicode(first.toLowerCase(), second.toLowerCase());
 
   return [
     // import 'module';
@@ -78,7 +78,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, moduleName(eslintSort)],
+      sort: member(eslintSort),
       sortNamedMembers: alias(eslintSort)
     },
     {
@@ -87,7 +87,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, moduleName(eslintSort)]
+      sort: member(eslintSort)
     }
   ];
 };
