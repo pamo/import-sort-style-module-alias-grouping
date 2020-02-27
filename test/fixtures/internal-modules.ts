@@ -8,7 +8,9 @@ import { SharedComponent } from '../../shared/components/component';
 import { SiblingComponent } from './sibling-component';
 import { ParentComponent } from '../../parent/parent-component';
 import { SharedService } from '../../../shared/services/shared-service';
-import { AAStartsWithARelativeNearbyImport } from './shared';
+import { A } from './shared';
+import { a } from './shared';
+import { b } from './shared';
 `.trim() + '\n';
 
 export const expected =
@@ -18,9 +20,11 @@ import { logoutPath } from '@app/core/auth/shared/auth-constants';
 import { invoke } from '@app/utils';
 import { environment } from '@environments/environment';
 
-import { AAStartsWithARelativeNearbyImport } from './shared';
+import { SharedService } from '../../../shared/services/shared-service';
 import { ParentComponent } from '../../parent/parent-component';
 import { SharedComponent } from '../../shared/components/component';
-import { SharedService } from '../../../shared/services/shared-service';
+import { A } from './shared';
+import { a } from './shared';
+import { b } from './shared';
 import { SiblingComponent } from './sibling-component';
 `.trim() + '\n';

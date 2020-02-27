@@ -1,6 +1,5 @@
-import { IStyleAPI, IStyleItem } from 'import-sort-style';
-
 import { IImport } from 'import-sort-parser';
+import { IStyleAPI, IStyleItem } from 'import-sort-style';
 
 const hasAlias = (aliases: string[]) => (imported: IImport) =>
   aliases.some((alias: string): boolean => imported.moduleName.includes(alias));
@@ -13,6 +12,7 @@ export default (
   const {
     alias,
     and,
+    dotSegmentCount,
     hasNamespaceMember,
     hasNoMember,
     isAbsoluteModule,
@@ -77,7 +77,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: member(eslintSort),
+      sort: [dotSegmentCount, member(eslintSort)],
       sortNamedMembers: alias(eslintSort)
     },
     {
@@ -86,7 +86,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: member(eslintSort)
+      sort: [dotSegmentCount, member(eslintSort)]
     }
   ];
 };
