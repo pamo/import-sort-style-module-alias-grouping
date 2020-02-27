@@ -118,7 +118,7 @@
         "signature": "704bb81510a81a95cbb04cec001d7acc6adf4a6a77b15b77b053f6b332566785"
       },
       "./src/index.ts": {
-        "version": "af6deef7950323eedf63e7d03832e02a5d35d75715712f3d5c74337cfc385c31",
+        "version": "df4452a493686855cc4ca2b349eb619114ce9a1dfbfe940e6620655e51121a16",
         "signature": "30ee4585dd6a7608123a457af8534978cf148505e1099b4717be26411354d45f"
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -435,8 +435,8 @@
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "./src/index.ts": [
-        "./node_modules/import-sort-style/lib/index.d.ts",
         "./node_modules/import-sort-parser/lib/index.d.ts",
+        "./node_modules/import-sort-style/lib/index.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts"
       ],
