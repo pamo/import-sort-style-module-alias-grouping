@@ -9,7 +9,7 @@ import { SiblingComponent } from './sibling-component';
 import { ParentComponent } from '../../parent/parent-component';
 import { SharedService } from '../../../shared/services/shared-service';
 import { AAStartsWithARelativeNearbyImport } from './shared';
-`.trim() + "\n";
+`.trim() + '\n';
 
 export const expected =
   `
@@ -23,4 +23,4 @@ import { ParentComponent } from '../../parent/parent-component';
 import { SharedComponent } from '../../shared/components/component';
 import { SharedService } from '../../../shared/services/shared-service';
 import { SiblingComponent } from './sibling-component';
-`.trim() + "\n";
+`.trim() + '\n';

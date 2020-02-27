@@ -46,4 +46,4 @@ import {
 import { SummariesResolver } from './shared/summaries.resolver';
 import { SummariesRoutingModule } from './summaries-routing.module';
 import { SummariesSelectors } from './store/summaries.selectors';
-`.trim() + "\n";
+`.trim() + '\n';
