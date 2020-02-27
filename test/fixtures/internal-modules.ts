@@ -28,3 +28,23 @@ import { a } from './shared';
 import { b } from './shared';
 import { SiblingComponent } from './sibling-component';
 `.trim() + '\n';
+
+export const code2 =
+  `
+import { A } from ./
+import { A } from ../../
+import { A } from ../../../
+import { a } from ./
+import { b } from ../../
+import { c } from ../../../
+`.trim() + '\n';
+
+export const expected2 =
+  `
+import { A } from ../../../
+import { c } from ../../../
+import { A } from ../../
+import { b } from ../../
+import { A } from ./
+import { a } from ./
+`.trim() + '\n';
