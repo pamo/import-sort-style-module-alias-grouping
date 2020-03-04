@@ -26,8 +26,7 @@ export default (
 
   const isAliasModule = hasAlias(options.alias || []);
 
-  const eslintSort = (first, second) =>
-    unicode(first.toLowerCase(), second.toLowerCase());
+  const eslintSort = (first, second) => unicode(first.toLowerCase(), second.toLowerCase());
 
   return [
     // import 'module';
@@ -77,7 +76,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, member(eslintSort)],
+      sort: [dotSegmentCount, moduleName(eslintSort)],
       sortNamedMembers: alias(eslintSort)
     },
     {
@@ -86,7 +85,7 @@ export default (
     // relative Modules
     {
       match: isRelativeModule,
-      sort: [dotSegmentCount, member(eslintSort)]
+      sort: [dotSegmentCount, moduleName(eslintSort)]
     }
   ];
 };

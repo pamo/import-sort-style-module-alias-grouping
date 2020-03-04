@@ -8,9 +8,6 @@ import { SharedComponent } from '../../shared/components/component';
 import { SiblingComponent } from './sibling-component';
 import { ParentComponent } from '../../parent/parent-component';
 import { SharedService } from '../../../shared/services/shared-service';
-import { A } from './shared';
-import { a } from './shared';
-import { b } from './shared';
 `.trim() + '\n';
 
 export const expected =
@@ -23,28 +20,5 @@ import { environment } from '@environments/environment';
 import { SharedService } from '../../../shared/services/shared-service';
 import { ParentComponent } from '../../parent/parent-component';
 import { SharedComponent } from '../../shared/components/component';
-import { A } from './shared';
-import { a } from './shared';
-import { b } from './shared';
 import { SiblingComponent } from './sibling-component';
-`.trim() + '\n';
-
-export const code2 =
-  `
-import { A } from ./
-import { A } from ../../
-import { A } from ../../../
-import { a } from ./
-import { b } from ../../
-import { c } from ../../../
-`.trim() + '\n';
-
-export const expected2 =
-  `
-import { A } from ../../../
-import { c } from ../../../
-import { A } from ../../
-import { b } from ../../
-import { A } from ./
-import { a } from ./
 `.trim() + '\n';
