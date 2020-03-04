@@ -118,7 +118,7 @@
         "signature": "704bb81510a81a95cbb04cec001d7acc6adf4a6a77b15b77b053f6b332566785"
       },
       "./src/index.ts": {
-        "version": "df4452a493686855cc4ca2b349eb619114ce9a1dfbfe940e6620655e51121a16",
+        "version": "b7e3896c8cba2e34e45e0fee78611138929e4825e62cfef602e335ee0883f09d",
         "signature": "30ee4585dd6a7608123a457af8534978cf148505e1099b4717be26411354d45f"
       },
       "./node_modules/@types/node/globals.d.ts": {
